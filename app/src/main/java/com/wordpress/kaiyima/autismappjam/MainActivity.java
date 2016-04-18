@@ -8,6 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Button;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -26,6 +29,16 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+        final Button welcomeButton = (Button)findViewById(R.id.welcomeButton);
+        welcomeButton.setOnClickListener(
+                new Button.OnClickListener(){
+                    public void onClick(View v){
+                        TextView welcomeTag = (TextView)findViewById(R.id.welcomeTag);
+                        welcomeTag.setText("Hello World!");
+                    }
+                }
+        );
     }
 
     @Override
