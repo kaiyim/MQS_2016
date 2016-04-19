@@ -10,7 +10,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.TextView;
+import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,14 +31,29 @@ public class MainActivity extends AppCompatActivity {
         });
 
         final Button welcomeButton = (Button)findViewById(R.id.welcomeButton);
+
         welcomeButton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         TextView welcomeTag = (TextView)findViewById(R.id.welcomeTag);
-                        welcomeTag.setText("Hello World!");
+                        welcomeTag.setText("Entering Magic World!");
+                        Intent toNavigation = new Intent(MainActivity.this, NavigationListActivity.class);
+                        startActivity(toNavigation);
                     }
                 }
         );
+
+        welcomeButton.setOnLongClickListener(
+                new Button.OnLongClickListener(){
+                    public boolean onLongClick(View v){
+                        TextView welcomeTag = (TextView)findViewById(R.id.welcomeTag);
+                        welcomeTag.setText("You are awesome!");
+                        return true;
+                    }
+                }
+        );
+
+
     }
 
     @Override

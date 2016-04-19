@@ -3,4 +3,6 @@
     <string name="action_settings">Settings</string>
     <string name="welcomeTag">Welcome to our new app!</string>
     <string name="welcomeButton">Click</string>
+    <string name="title_navigation_list">Navigations</string>
+    <string name="title_navigation_detail">Navigation Detail</string>
 </resources>

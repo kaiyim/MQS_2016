@@ -18,6 +18,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".NavigationListActivity"
+            android:label="@string/title_navigation_list"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".NavigationDetailActivity"
+            android:label="@string/title_navigation_detail"
+            android:parentActivityName=".NavigationListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.wordpress.kaiyima.autismappjam.NavigationListActivity" />
+        </activity>
     </application>
 
 </manifest>
