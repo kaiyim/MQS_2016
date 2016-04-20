@@ -1,0 +1,67 @@
+package com.wordpress.kaiyima.autismappjam;
+
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.Cursor;
+import android.content.Context;
+import android.content.ContentValues;
+
+
+public class ProfileDBManager extends SQLiteOpenHelper{
+
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "profile.db";
+    public static final String TABLE_PROFILE = "profiles";
+    public static final String COLUMN_ID = "_id";
+    public static final String COLUMN_USERNAME = "username";
+    public static final String COLUMN_EXP = "exp";
+
+    public ProfileDBManager(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+        super(context, DATABASE_NAME, factory, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+        String query = "CREATE TABLE" + TABLE_PROFILE + "(" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " +
+                COLUMN_USERNAME + " TEXT " +
+                COLUMN_EXP + " INTEGER " +
+                ");";
+        sqLiteDatabase.execSQL(query);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+        sqLiteDatabase.execSQL("DROP TABLE IF EXIST " + TABLE_PROFILE);
+        onCreate(sqLiteDatabase);
+    }
+
+    //Add new row to DB
+    public void addProfile(UserProfile profile){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_USERNAME, profile.get_username());
+        values.put(COLUMN_EXP, 0);
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        sqLiteDatabase.insert(TABLE_PROFILE, null, values);
+        sqLiteDatabase.close();
+    }
+
+    //Delete a profile from DB
+    public  void deleteProfile(String userName){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        sqLiteDatabase.execSQL("DELETE FROM " + TABLE_PROFILE + " WHERE " + "=\"" + userName + "\";");
+    }
+
+    public boolean updateProfile(int id, String userName, int exp){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", userName);
+        contentValues.put("exp", exp);
+        sqLiteDatabase.update("contacts", contentValues, "id = ? ", new String[] { Integer.toString(id) } );
+        return true;
+    }
+
+    public String databaseToString(){
+        return "Joey 33xp";
+    }
+}

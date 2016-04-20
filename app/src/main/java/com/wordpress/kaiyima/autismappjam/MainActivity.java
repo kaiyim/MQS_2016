@@ -14,6 +14,9 @@ import android.content.Intent;
 
 public class MainActivity extends AppCompatActivity {
 
+    TextView leaderboard;
+    ProfileDBManager profileDBManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +56,15 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
+        leaderboard = (TextView) findViewById(R.id.Score);
+        profileDBManager = new ProfileDBManager(this, null, null, 1);
+        showDB();
 
+    }
+
+    public void showDB(){
+        String dbString = profileDBManager.databaseToString();
+        leaderboard.setText(dbString);
     }
 
     @Override
