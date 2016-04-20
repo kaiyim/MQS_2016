@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                 }
         );
 
-        leaderboard = (TextView) findViewById(R.id.Score);
+        leaderboard = (TextView) findViewById(R.id.leader_board);
         profileDBManager = new ProfileDBManager(this, null, null, 1);
         showDB();
 

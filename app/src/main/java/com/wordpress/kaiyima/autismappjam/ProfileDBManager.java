@@ -22,9 +22,9 @@ public class ProfileDBManager extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
-        String query = "CREATE TABLE" + TABLE_PROFILE + "(" +
-                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT " +
-                COLUMN_USERNAME + " TEXT " +
+        String query = "CREATE TABLE " + TABLE_PROFILE + " (" +
+                COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_USERNAME + " TEXT, " +
                 COLUMN_EXP + " INTEGER " +
                 ");";
         sqLiteDatabase.execSQL(query);
@@ -62,6 +62,19 @@ public class ProfileDBManager extends SQLiteOpenHelper{
     }
 
     public String databaseToString(){
-        return "Joey 33xp";
+        String dbString = "";
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_PROFILE + " WHERE 1;";
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()){
+            if(c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null){
+                dbString += c.getString(c.getColumnIndex(COLUMN_USERNAME)) + ": " +
+                        c.getString(c.getColumnIndex(COLUMN_EXP)) + "xp\n";
+                c.moveToNext();
+            }
+        }
+        db.close();
+        return dbString;
     }
 }
