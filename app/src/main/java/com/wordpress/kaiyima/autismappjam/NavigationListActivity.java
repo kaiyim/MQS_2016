@@ -28,7 +28,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class NavigationListActivity extends AppCompatActivity {
+public class NavigationListActivity extends AppCompatActivity implements NavigationDetailFragment.buttonListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -67,9 +67,18 @@ public class NavigationListActivity extends AppCompatActivity {
         }
     }
 
+
     private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
     }
+
+    public void buttonClicked(String command){
+        if(command == "play"){
+            Intent toMain = new Intent(NavigationListActivity.this, MainActivity.class);
+            startActivity(toMain);
+        }
+    }
+
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
@@ -90,7 +99,6 @@ public class NavigationListActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(final ViewHolder holder, int position) {
             holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).id);
             holder.mContentView.setText(mValues.get(position).content);
 
             holder.mView.setOnClickListener(new View.OnClickListener() {
@@ -122,14 +130,12 @@ public class NavigationListActivity extends AppCompatActivity {
 
         public class ViewHolder extends RecyclerView.ViewHolder {
             public final View mView;
-            public final TextView mIdView;
             public final TextView mContentView;
             public DummyContent.DummyItem mItem;
 
             public ViewHolder(View view) {
                 super(view);
                 mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
                 mContentView = (TextView) view.findViewById(R.id.content);
             }
 

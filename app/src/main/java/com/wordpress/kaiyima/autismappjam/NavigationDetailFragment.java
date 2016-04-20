@@ -1,13 +1,18 @@
 package com.wordpress.kaiyima.autismappjam;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.app.Activity;
 
 import com.wordpress.kaiyima.autismappjam.dummy.DummyContent;
 
@@ -54,16 +59,40 @@ public class NavigationDetailFragment extends Fragment {
         }
     }
 
+    buttonListener activityCommander;
+
+    public interface buttonListener{
+        public void buttonClicked(String command);
+    }
+
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try {
+            activityCommander = (buttonListener) context;
+        } catch (ClassCastException e){
+            throw new ClassCastException(context.toString());
+        }
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.navigation_detail, container, false);
 
-        // Show the dummy content as text in a TextView.
-        if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.navigation_detail)).setText(mItem.details);
-        }
+        final Button playGameButton = (Button) rootView.findViewById(R.id.PlayGameButton);
+
+        playGameButton.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick(View v){
+                        buttonClicked(v);
+                    }
+                }
+        );
 
         return rootView;
+    }
+
+    public void buttonClicked(View view){
+        activityCommander.buttonClicked("play");
     }
 }

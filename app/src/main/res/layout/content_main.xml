@@ -28,4 +28,5 @@
         android:id="@+id/welcomeButton"
         android:layout_below="@+id/welcomeTag"
         android:layout_centerHorizontal="true" />
+
 </RelativeLayout>

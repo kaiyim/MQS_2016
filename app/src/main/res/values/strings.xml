@@ -5,4 +5,5 @@
     <string name="welcomeButton">Click</string>
     <string name="title_navigation_list">Navigations</string>
     <string name="title_navigation_detail">Navigation Detail</string>
+    <string name="play_now_button">Play Now!</string>
 </resources>
