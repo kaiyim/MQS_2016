@@ -11,34 +11,28 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.wordpress.kaiyima.autismappjam.MainActivity"
     tools:showIn="@layout/activity_main"
-    android:textAlignment="center">
+    android:textAlignment="center"
+    android:descendantFocusability="beforeDescendants"
+    android:focusableInTouchMode="true"
+    android:id="@+id/main_layout">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="@string/welcomeTag"
-        android:id="@+id/welcomeTag"
+        android:text="@string/welcomeText"
+        android:id="@+id/welcomeText"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/welcomeButton"
-        android:id="@+id/welcomeButton"
-        android:layout_below="@+id/welcomeTag"
-        android:layout_centerHorizontal="true" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Leader Board"
-        android:id="@+id/leader_board"
-        android:layout_alignTop="@+id/user_name_input"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Choose a user or create a new user below"
+        android:id="@+id/instructionText"
+        android:layout_below="@+id/welcomeText"
+        android:layout_centerHorizontal="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -46,9 +40,9 @@
         android:text="Add User"
         android:id="@+id/add_user_button"
         android:onClick="addButtonClicked"
-        android:layout_below="@+id/welcomeButton"
-        android:layout_toRightOf="@+id/welcomeTag"
-        android:layout_toEndOf="@+id/welcomeTag" />
+        android:layout_toRightOf="@+id/welcomeText"
+        android:layout_toEndOf="@+id/welcomeText"
+        android:layout_below="@+id/instructionText" />
 
     <Button
         android:layout_width="wrap_content"
@@ -71,14 +65,23 @@
         android:layout_toLeftOf="@+id/add_user_button"
         android:layout_toStartOf="@+id/add_user_button" />
 
-    <TextView
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="300dp"
+        android:id="@+id/user_list"
+        android:layout_below="@+id/add_user_button"
+        android:layout_alignLeft="@+id/user_name_input"
+        android:layout_alignStart="@+id/user_name_input"
+        android:layout_alignRight="@+id/delete_user_button"
+        android:layout_alignEnd="@+id/delete_user_button"
+        android:choiceMode="singleChoice" />
+
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Leader Board"
-        android:id="@+id/textView"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Choose a user and then click here!"
+        android:id="@+id/enter_button"
+        android:layout_below="@+id/user_list"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

@@ -9,69 +9,76 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.Toast;
-import android.content.Context;
+import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.AdapterView;
 import android.app.Service;
-
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements TextView.OnEditorActionListener
 {
 
-    TextView leaderboard;
+//    TextView leaderboard;
     ProfileDBManager profileDBManager;
     EditText userNameInput;
     InputMethodManager imm;
-    HashMap<String, UserProfile> profileHashMap;
+//    HashMap<String, UserProfile> profileHashMap;
+    ArrayList<UserProfile> profileList;
+    ArrayList<String> userNameList;
+    String userChoice;
+    ListView userList;
+    ListAdapter adapter;
+    Button enterButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.main_layout).requestFocus();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+//        fab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
 
-        final Button welcomeButton = (Button)findViewById(R.id.welcomeButton);
 
-        welcomeButton.setOnClickListener(
+        enterButton = (Button)findViewById(R.id.enter_button);
+        enterButton.setOnClickListener(
                 new Button.OnClickListener(){
                     public void onClick(View v){
-                        TextView welcomeTag = (TextView)findViewById(R.id.welcomeTag);
-                        welcomeTag.setText("Entering Magic World!");
-                        Intent toNavigation = new Intent(MainActivity.this, NavigationListActivity.class);
-                        startActivity(toNavigation);
+                        if(!userChoice.isEmpty()) {
+                            TextView welcomeTag = (TextView) findViewById(R.id.welcomeText);
+                            welcomeTag.setText("Entering Magic World!");
+                            Intent toNavigation = new Intent(MainActivity.this, NavigationListActivity.class);
+                            toNavigation.putExtra("userName", userChoice);
+                            startActivity(toNavigation);
+                        }else{
+                            Toast.makeText(MainActivity.this, "You need to choose a user first before entering the Magic World",
+                                    Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
         );
 
-//        welcomeButton.setOnLongClickListener(
-//                new Button.OnLongClickListener(){
-//                    public boolean onLongClick(View v){
-//                        TextView welcomeTag = (TextView)findViewById(R.id.welcomeTag);
-//                        welcomeTag.setText("You are awesome!");
-//                        return true;
-//                    }
-//                }
-//        );
-
-        leaderboard = (TextView) findViewById(R.id.leader_board);
+        userChoice = "";
+//        leaderboard = (TextView) findViewById(R.id.leader_board);
         profileDBManager = new ProfileDBManager(this, null, null, 1);
-        profileHashMap = profileDBManager.databaseToHashMap();
+        profileList = profileDBManager.databaseToList();
+//        profileHashMap = profileDBManager.databaseToHashMap();
 
 //        final Button addUserButton = (Button)findViewById(R.id.add_user_button);
 //        final Button deleteUserButton = (Button)findViewById(R.id.delete_user_button);
@@ -80,22 +87,42 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         imm = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
         imm.showSoftInput(userNameInput, 0);
-        showDB();
+
+        userNameList = new ArrayList<>();
+        for (UserProfile k : profileList){
+            userNameList.add(k.get_username());
+        }
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNameList);
+        userList = (ListView) findViewById(R.id.user_list);
+        userList.setAdapter(adapter);
+
+        userList.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String selected = (String) (userList.getItemAtPosition(position));
+                setUserChoice(selected);
+                setEnterButton(selected);
+            }
+        });
+
+//        showDB();
     }
 
-    public void showDB(){
-        String dbString = profileDBManager.databaseToString();
-        leaderboard.setText(dbString);
-        userNameInput.setText("");
-    }
+//    public void showDB(){
+//        String dbString = profileDBManager.databaseToString();
+//        leaderboard.setText(dbString);
+//        userNameInput.setText("");
+//    }
 
     public void addButtonClicked(View view){
         String newUserName = userNameInput.getText().toString();
         if (!newUserName.isEmpty()) {
-            if (!profileHashMap.containsKey(newUserName)) {
+            if (!userNameList.contains(newUserName)) {
                 UserProfile newUser = new UserProfile(newUserName);
                 profileDBManager.addProfile(newUser);
-                profileHashMap.put(newUserName, newUser);
+                userNameList.add(newUserName);
+//                refreshUserList();
+                ((BaseAdapter) userList.getAdapter()).notifyDataSetChanged();
             }
             else{
                 Toast.makeText(this, "Oops! We already have a player using your name! Please change a name and try again!",
@@ -103,25 +130,39 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
             }
         }
         imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
-        showDB();
+        findViewById(R.id.main_layout).requestFocus();
+//        showDB();
     }
 
     public void deleteButtonClicked(View view){
         String deleteUserName = userNameInput.getText().toString();
         if (!deleteUserName.isEmpty()) {
             profileDBManager.deleteProfile(deleteUserName);
+            userNameList.remove(deleteUserName);
+//            refreshUserList();
+            ((BaseAdapter) userList.getAdapter()).notifyDataSetChanged();
         }
         imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
-        showDB();
+        findViewById(R.id.main_layout).requestFocus();
+//        showDB();
     }
 
-    public void addUser(String userName){
-        profileDBManager.addProfile(new UserProfile(userName));
+
+
+    private void setUserChoice(String userName){
+        userChoice = userName;
     }
 
-    public void deleteUser(String userName){
-        profileDBManager.deleteProfile(userName);
+    private void setEnterButton(String userName){
+        enterButton.setText("Hi " + userName + "! Click me to enter!");
     }
+
+//    private UserProfile stringToProfile(String userName){
+//        for (UserProfile i : profileList){
+//            if (i.get_username() == userName)
+//                return i;
+//        }
+//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -147,11 +188,11 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
 
     @Override
     public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
-        if (i == EditorInfo.IME_ACTION_DONE){
-            String newUserName = userNameInput.getText().toString();
-            addUser(newUserName);
-            return true;
-        }
+//        if (i == EditorInfo.IME_ACTION_DONE){
+//            String newUserName = userNameInput.getText().toString();
+//            addUser(newUserName);
+//            return true;
+//        }
         return false;
     }
 }

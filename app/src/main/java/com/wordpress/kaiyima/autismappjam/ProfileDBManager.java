@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.content.Context;
 import android.content.ContentValues;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -71,7 +72,8 @@ public class ProfileDBManager extends SQLiteOpenHelper{
         c.moveToFirst();
         while (!c.isAfterLast()){
             if(c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null){
-                dbString += c.getString(c.getColumnIndex(COLUMN_USERNAME)) + ": " +
+                dbString += c.getString(c.getColumnIndex(COLUMN_ID)) + " " +
+                        c.getString(c.getColumnIndex(COLUMN_USERNAME)) + ": " +
                         c.getString(c.getColumnIndex(COLUMN_EXP)) + "xp\n";
             }
             c.moveToNext();
@@ -97,5 +99,24 @@ public class ProfileDBManager extends SQLiteOpenHelper{
         }
         db.close();
         return dbMap;
+    }
+
+    public ArrayList<UserProfile> databaseToList(){
+        ArrayList<UserProfile> dbList = new ArrayList<>();
+        SQLiteDatabase db = getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_PROFILE + " WHERE 1;";
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        while (!c.isAfterLast()){
+            if(c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null){
+                UserProfile userProfile = new UserProfile(c.getString(c.getColumnIndex(COLUMN_USERNAME)));
+                userProfile.set_id(c.getInt(c.getColumnIndex(COLUMN_ID)));
+                userProfile.set_exp(c.getInt(c.getColumnIndex(COLUMN_EXP)));
+                dbList.add(userProfile);
+            }
+            c.moveToNext();
+        }
+        db.close();
+        return dbList;
     }
 }
