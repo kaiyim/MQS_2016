@@ -5,19 +5,31 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
+import android.widget.Toast;
+import android.content.Context;
+import android.app.Service;
 
-public class MainActivity extends AppCompatActivity {
+import java.util.HashMap;
+
+public class MainActivity extends AppCompatActivity implements TextView.OnEditorActionListener
+{
 
     TextView leaderboard;
     ProfileDBManager profileDBManager;
     EditText userNameInput;
+    InputMethodManager imm;
+    HashMap<Integer, UserProfile> profileHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +72,15 @@ public class MainActivity extends AppCompatActivity {
 
         leaderboard = (TextView) findViewById(R.id.leader_board);
         profileDBManager = new ProfileDBManager(this, null, null, 1);
+        profileHashMap = profileDBManager.databaseToHashMap();
 
-        final Button addUserButton = (Button)findViewById(R.id.add_user_button);
-        final Button deleteUserButton = (Button)findViewById(R.id.delete_user_button);
+//        final Button addUserButton = (Button)findViewById(R.id.add_user_button);
+//        final Button deleteUserButton = (Button)findViewById(R.id.delete_user_button);
         userNameInput = (EditText) findViewById(R.id.user_name_input);
+        userNameInput.setOnEditorActionListener(this);
+        imm = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
+        imm.showSoftInput(userNameInput, 0);
         showDB();
     }
 
@@ -75,17 +92,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void addButtonClicked(View view){
         String newUserName = userNameInput.getText().toString();
-        if (newUserName != null) {
+        if (!newUserName.isEmpty()) {
             profileDBManager.addProfile(new UserProfile(newUserName));
         }
+        imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
         showDB();
     }
 
     public void deleteButtonClicked(View view){
         String deleteUserName = userNameInput.getText().toString();
-        if (deleteUserName != null) {
+        if (!deleteUserName.isEmpty()) {
             profileDBManager.deleteProfile(deleteUserName);
         }
+        imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
         showDB();
     }
 
@@ -117,5 +136,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public boolean onEditorAction(TextView textView, int i, KeyEvent keyEvent) {
+        if (i == EditorInfo.IME_ACTION_DONE){
+            String newUserName = userNameInput.getText().toString();
+            addUser(newUserName);
+            return true;
+        }
+        return false;
     }
 }

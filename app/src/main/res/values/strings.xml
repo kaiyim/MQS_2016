@@ -6,4 +6,5 @@
     <string name="title_navigation_list">Navigations</string>
     <string name="title_navigation_detail">Navigation Detail</string>
     <string name="play_now_button">Play Now!</string>
+    <string name="leader_board_string">Leader Board</string>
 </resources>

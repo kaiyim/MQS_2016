@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.wordpress.kaiyima.autismappjam.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/activity_main"
+    android:textAlignment="center">
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Leader Board"
         android:id="@+id/leader_board"
-        android:layout_alignTop="@+id/welcomeTag"
+        android:layout_alignTop="@+id/user_name_input"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -44,20 +45,20 @@
         android:layout_height="wrap_content"
         android:text="Add User"
         android:id="@+id/add_user_button"
+        android:onClick="addButtonClicked"
         android:layout_below="@+id/welcomeButton"
-        android:layout_toLeftOf="@+id/welcomeTag"
-        android:layout_toStartOf="@+id/welcomeTag"
-        android:onClick="addButtonClicked" />
+        android:layout_toRightOf="@+id/welcomeTag"
+        android:layout_toEndOf="@+id/welcomeTag" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Delete User"
         android:id="@+id/delete_user_button"
+        android:onClick="deleteButtonClicked"
         android:layout_alignTop="@+id/add_user_button"
-        android:layout_toRightOf="@+id/welcomeTag"
-        android:layout_toEndOf="@+id/welcomeTag"
-        android:onClick="deleteButtonClicked" />
+        android:layout_toRightOf="@+id/add_user_button"
+        android:layout_toEndOf="@+id/add_user_button" />
 
     <EditText
         android:layout_width="450dp"
@@ -66,9 +67,18 @@
         android:ems="10"
         android:id="@+id/user_name_input"
         android:autoText="false"
-        android:layout_below="@+id/add_user_button"
-        android:layout_alignLeft="@+id/add_user_button"
-        android:layout_alignStart="@+id/add_user_button"
-        android:layout_marginTop="20dp" />
+        android:layout_alignBottom="@+id/add_user_button"
+        android:layout_toLeftOf="@+id/add_user_button"
+        android:layout_toStartOf="@+id/add_user_button" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Leader Board"
+        android:id="@+id/textView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
