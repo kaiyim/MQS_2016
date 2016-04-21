@@ -17,20 +17,21 @@
     android:id="@+id/main_layout"
     android:background="@drawable/flower">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:layout_width="320dp"
+        android:layout_height="115dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/welcomeText"
         android:id="@+id/welcomeText"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/welcome" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Choose a user or create a new user below"
+        android:text="Choose an user or create a new user"
         android:id="@+id/instructionText"
         android:layout_below="@+id/welcomeText"
         android:layout_centerHorizontal="true" />
@@ -53,7 +54,8 @@
         android:onClick="deleteButtonClicked"
         android:layout_alignTop="@+id/add_user_button"
         android:layout_toRightOf="@+id/add_user_button"
-        android:layout_toEndOf="@+id/add_user_button" />
+        android:layout_toEndOf="@+id/add_user_button"
+        android:visibility="gone" />
 
     <EditText
         android:layout_width="300dp"
@@ -64,11 +66,12 @@
         android:autoText="false"
         android:layout_alignBottom="@+id/add_user_button"
         android:layout_toLeftOf="@+id/add_user_button"
-        android:layout_toStartOf="@+id/add_user_button" />
+        android:layout_toStartOf="@+id/add_user_button"
+        android:layout_alignLeft="@+id/instructionText" />
 
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
+        android:layout_height="200dp"
         android:id="@+id/user_list"
         android:layout_below="@+id/add_user_button"
         android:layout_alignLeft="@+id/user_name_input"
