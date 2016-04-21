@@ -9,7 +9,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.WindowManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -29,7 +28,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     ProfileDBManager profileDBManager;
     EditText userNameInput;
     InputMethodManager imm;
-    HashMap<Integer, UserProfile> profileHashMap;
+    HashMap<String, UserProfile> profileHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,15 +59,15 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                 }
         );
 
-        welcomeButton.setOnLongClickListener(
-                new Button.OnLongClickListener(){
-                    public boolean onLongClick(View v){
-                        TextView welcomeTag = (TextView)findViewById(R.id.welcomeTag);
-                        welcomeTag.setText("You are awesome!");
-                        return true;
-                    }
-                }
-        );
+//        welcomeButton.setOnLongClickListener(
+//                new Button.OnLongClickListener(){
+//                    public boolean onLongClick(View v){
+//                        TextView welcomeTag = (TextView)findViewById(R.id.welcomeTag);
+//                        welcomeTag.setText("You are awesome!");
+//                        return true;
+//                    }
+//                }
+//        );
 
         leaderboard = (TextView) findViewById(R.id.leader_board);
         profileDBManager = new ProfileDBManager(this, null, null, 1);
@@ -93,7 +92,15 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
     public void addButtonClicked(View view){
         String newUserName = userNameInput.getText().toString();
         if (!newUserName.isEmpty()) {
-            profileDBManager.addProfile(new UserProfile(newUserName));
+            if (!profileHashMap.containsKey(newUserName)) {
+                UserProfile newUser = new UserProfile(newUserName);
+                profileDBManager.addProfile(newUser);
+                profileHashMap.put(newUserName, newUser);
+            }
+            else{
+                Toast.makeText(this, "Oops! We already have a player using your name! Please change a name and try again!",
+                        Toast.LENGTH_LONG).show();
+            }
         }
         imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
         showDB();

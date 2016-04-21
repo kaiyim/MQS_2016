@@ -25,6 +25,8 @@ public class DummyContent {
 
     private static final int COUNT = 5;
 
+    private static final String[] MenuItem = {"Play Game", "Daily Quest", "Achievement", "Weekly Leaderboard", "Help"};
+
     static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
@@ -38,8 +40,9 @@ public class DummyContent {
     }
 
     private static DummyItem createDummyItem(int position) {
-        return new DummyItem(String.valueOf(position), "Item " + position, makeDetails(position));
+        return new DummyItem(String.valueOf(position), MenuItem[position-1], makeDetails(position));
     }
+
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();

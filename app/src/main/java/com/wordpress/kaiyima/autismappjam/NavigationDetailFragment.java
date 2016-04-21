@@ -59,20 +59,6 @@ public class NavigationDetailFragment extends Fragment {
         }
     }
 
-    buttonListener activityCommander;
-
-    public interface buttonListener{
-        public void buttonClicked(String command);
-    }
-
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            activityCommander = (buttonListener) context;
-        } catch (ClassCastException e){
-            throw new ClassCastException(context.toString());
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -84,7 +70,7 @@ public class NavigationDetailFragment extends Fragment {
         playGameButton.setOnClickListener(
                 new View.OnClickListener(){
                     public void onClick(View v){
-                        buttonClicked(v);
+                        playButtonClicked(v);
                     }
                 }
         );
@@ -92,7 +78,9 @@ public class NavigationDetailFragment extends Fragment {
         return rootView;
     }
 
-    public void buttonClicked(View view){
-        activityCommander.buttonClicked("play");
+    public void playButtonClicked(View view){
+        Intent intent = new Intent(getActivity(), MainActivity.class);
+        startActivity(intent);
     }
+
 }

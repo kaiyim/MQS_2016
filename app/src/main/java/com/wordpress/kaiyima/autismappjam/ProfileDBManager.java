@@ -80,8 +80,8 @@ public class ProfileDBManager extends SQLiteOpenHelper{
         return dbString;
     }
 
-    public HashMap<Integer, UserProfile> databaseToHashMap(){
-        HashMap<Integer, UserProfile> dbMap = new HashMap<Integer, UserProfile>();
+    public HashMap<String, UserProfile> databaseToHashMap(){
+        HashMap<String, UserProfile> dbMap = new HashMap<String, UserProfile>();
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_PROFILE + " WHERE 1;";
         Cursor c = db.rawQuery(query, null);
@@ -91,7 +91,7 @@ public class ProfileDBManager extends SQLiteOpenHelper{
                 UserProfile userProfile = new UserProfile(c.getString(c.getColumnIndex(COLUMN_USERNAME)));
                 userProfile.set_id(c.getInt(c.getColumnIndex(COLUMN_ID)));
                 userProfile.set_exp(c.getInt(c.getColumnIndex(COLUMN_EXP)));
-                dbMap.put(c.getInt(c.getColumnIndex(COLUMN_ID)), userProfile);
+                dbMap.put(c.getString(c.getColumnIndex(COLUMN_USERNAME)), userProfile);
             }
             c.moveToNext();
         }

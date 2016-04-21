@@ -28,7 +28,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class NavigationListActivity extends AppCompatActivity implements NavigationDetailFragment.buttonListener {
+public class NavigationListActivity extends AppCompatActivity {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -72,13 +72,6 @@ public class NavigationListActivity extends AppCompatActivity implements Navigat
         recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
     }
 
-    public void buttonClicked(String command){
-        if(command == "play"){
-            Intent toMain = new Intent(NavigationListActivity.this, MainActivity.class);
-            startActivity(toMain);
-        }
-    }
-
 
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
@@ -101,6 +94,7 @@ public class NavigationListActivity extends AppCompatActivity implements Navigat
             holder.mItem = mValues.get(position);
             holder.mContentView.setText(mValues.get(position).content);
 
+            //Set Detail Fragment
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
