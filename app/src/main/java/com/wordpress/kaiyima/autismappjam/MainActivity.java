@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         findViewById(R.id.main_layout).requestFocus();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("MQS");
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         }
         imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
         findViewById(R.id.main_layout).requestFocus();
+        userNameInput.setText("");
 //        showDB();
     }
 
@@ -144,6 +146,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         }
         imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
         findViewById(R.id.main_layout).requestFocus();
+        userNameInput.setText("");
 //        showDB();
     }
 
