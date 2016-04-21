@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 import android.content.Intent;
@@ -16,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView leaderboard;
     ProfileDBManager profileDBManager;
+    EditText userNameInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,13 +60,41 @@ public class MainActivity extends AppCompatActivity {
 
         leaderboard = (TextView) findViewById(R.id.leader_board);
         profileDBManager = new ProfileDBManager(this, null, null, 1);
-        showDB();
 
+        final Button addUserButton = (Button)findViewById(R.id.add_user_button);
+        final Button deleteUserButton = (Button)findViewById(R.id.delete_user_button);
+        userNameInput = (EditText) findViewById(R.id.user_name_input);
+        showDB();
     }
 
     public void showDB(){
         String dbString = profileDBManager.databaseToString();
         leaderboard.setText(dbString);
+        userNameInput.setText("");
+    }
+
+    public void addButtonClicked(View view){
+        String newUserName = userNameInput.getText().toString();
+        if (newUserName != null) {
+            profileDBManager.addProfile(new UserProfile(newUserName));
+        }
+        showDB();
+    }
+
+    public void deleteButtonClicked(View view){
+        String deleteUserName = userNameInput.getText().toString();
+        if (deleteUserName != null) {
+            profileDBManager.deleteProfile(deleteUserName);
+        }
+        showDB();
+    }
+
+    public void addUser(String userName){
+        profileDBManager.addProfile(new UserProfile(userName));
+    }
+
+    public void deleteUser(String userName){
+        profileDBManager.deleteProfile(userName);
     }
 
     @Override

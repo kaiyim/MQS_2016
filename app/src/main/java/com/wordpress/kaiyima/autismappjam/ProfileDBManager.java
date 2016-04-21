@@ -49,7 +49,7 @@ public class ProfileDBManager extends SQLiteOpenHelper{
     //Delete a profile from DB
     public  void deleteProfile(String userName){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
-        sqLiteDatabase.execSQL("DELETE FROM " + TABLE_PROFILE + " WHERE " + "=\"" + userName + "\";");
+        sqLiteDatabase.execSQL("DELETE FROM " + TABLE_PROFILE + " WHERE " + COLUMN_USERNAME+ "=\"" + userName + "\";");
     }
 
     public boolean updateProfile(int id, String userName, int exp){
@@ -71,8 +71,8 @@ public class ProfileDBManager extends SQLiteOpenHelper{
             if(c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null){
                 dbString += c.getString(c.getColumnIndex(COLUMN_USERNAME)) + ": " +
                         c.getString(c.getColumnIndex(COLUMN_EXP)) + "xp\n";
-                c.moveToNext();
             }
+            c.moveToNext();
         }
         db.close();
         return dbString;
