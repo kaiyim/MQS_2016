@@ -9,7 +9,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.app.Activity;
@@ -70,7 +70,7 @@ public class NavigationDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.navigation_detail, container, false);
 
-        final Button playGameButton = (Button) rootView.findViewById(R.id.PlayGameButton);
+        final ImageButton playGameButton = (ImageButton) rootView.findViewById(R.id.PlayGameButton);
 
         playGameButton.setOnClickListener(
                 new View.OnClickListener(){
