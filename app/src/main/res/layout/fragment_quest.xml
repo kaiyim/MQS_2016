@@ -21,7 +21,8 @@
             android:layout_rowSpan="5"
             android:layout_marginTop="99dp"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_centerHorizontal="true"
+            android:textSize="28sp" />
 
         <ImageButton
             android:layout_width="250dp"
@@ -60,7 +61,8 @@
             android:id="@+id/questText"
             android:layout_below="@+id/chest2"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp" />
+            android:layout_marginTop="30dp"
+            android:textSize="28sp" />
 
     </RelativeLayout>
 </FrameLayout>

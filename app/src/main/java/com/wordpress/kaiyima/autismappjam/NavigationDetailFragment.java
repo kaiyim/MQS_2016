@@ -80,6 +80,26 @@ public class NavigationDetailFragment extends Fragment {
                 }
         );
 
+        final ImageButton playGameButton2 = (ImageButton) rootView.findViewById(R.id.PlayGameButton2);
+
+        playGameButton2.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick(View v){
+                        playButtonClicked(v);
+                    }
+                }
+        );
+
+        final ImageButton playGameButton3 = (ImageButton) rootView.findViewById(R.id.PlayGameButton3);
+
+        playGameButton3.setOnClickListener(
+                new View.OnClickListener(){
+                    public void onClick(View v){
+                        playButtonClicked(v);
+                    }
+                }
+        );
+
         return rootView;
     }
 

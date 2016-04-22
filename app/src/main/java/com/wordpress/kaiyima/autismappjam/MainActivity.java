@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         for (UserProfile k : profileList){
             userNameList.add(k.get_username());
         }
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, userNameList);
+        adapter = new ArrayAdapter<>(this, R.layout.question_list, userNameList);
         userList = (ListView) findViewById(R.id.user_list);
         userList.setAdapter(adapter);
 

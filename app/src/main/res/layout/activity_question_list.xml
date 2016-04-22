@@ -8,8 +8,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
-    tools:context="com.wordpress.kaiyima.autismappjam.QuestionList"
-    android:background="@drawable/light">
+    tools:context="com.wordpress.kaiyima.autismappjam.QuestionList">
 
     <ListView
         android:layout_width="match_parent"
