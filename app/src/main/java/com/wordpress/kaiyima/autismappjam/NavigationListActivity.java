@@ -107,6 +107,17 @@ public class NavigationListActivity extends AppCompatActivity implements QuestFr
             holder.mItem = mValues.get(position);
             holder.mContentView.setText(mValues.get(position).content);
 
+            //Show Play Game at start
+            if(mTwoPane){
+                Bundle arguments = new Bundle();
+                arguments.putString(NavigationDetailFragment.ARG_USER_NAME, userName);
+                NavigationDetailFragment fragment = new NavigationDetailFragment();
+                fragment.setArguments(arguments);
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.navigation_detail_container, fragment)
+                        .commit();
+            }
+
             //Set Detail Fragment
             holder.mView.setOnClickListener(new View.OnClickListener() {
                 @Override

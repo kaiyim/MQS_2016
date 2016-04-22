@@ -37,6 +37,7 @@ public class QuestionList extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(QuestionList.this, NavigationListActivity.class);
+                i.putExtra("userName", userName);
                 startActivity(i);
             }
         });

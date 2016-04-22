@@ -73,16 +73,21 @@ public class ProfileDBManager extends SQLiteOpenHelper{
     }
 
     public UserProfile getProfile(String userName){
-        UserProfile user = new UserProfile(userName);
+        UserProfile user = null;
         SQLiteDatabase db = getReadableDatabase();
         String query = "SELECT * FROM " + TABLE_PROFILE + " WHERE " +
                 COLUMN_USERNAME + "=\"" + userName + "\";";
         Cursor c = db.rawQuery(query, null);
-        c.moveToFirst();
-        if (c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null) {
-            user.set_exp(c.getInt(c.getColumnIndex(COLUMN_EXP)));
-            user.set_id(c.getInt(c.getColumnIndex(COLUMN_ID)));
+        if (c.getCount() > 0) {
+            c.moveToFirst();
+            user = new UserProfile(userName);
+            if (c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null) {
+                user.set_exp(c.getInt(c.getColumnIndex(COLUMN_EXP)));
+                user.set_id(c.getInt(c.getColumnIndex(COLUMN_ID)));
+            }
         }
+        c.close();
+        db.close();
         return user;
     }
 
