@@ -107,13 +107,21 @@ public class NavigationListActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
                     if (mTwoPane) {
-                        Bundle arguments = new Bundle();
-                        arguments.putString(NavigationDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-                        NavigationDetailFragment fragment = new NavigationDetailFragment();
-                        fragment.setArguments(arguments);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.navigation_detail_container, fragment)
-                                .commit();
+                        //holder.mItem.id = 1 --> Play Game
+                        if(holder.mItem.id == "1") {
+                            Bundle arguments = new Bundle();
+                            arguments.putString(NavigationDetailFragment.ARG_USER_NAME, userName);
+                            NavigationDetailFragment fragment = new NavigationDetailFragment();
+                            fragment.setArguments(arguments);
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.navigation_detail_container, fragment)
+                                    .commit();
+
+                        }
+                        //id = 2 -->Daily Quest
+                        else if (holder.mItem.id == "2"){
+                            Toast.makeText(NavigationListActivity.this, "pos 2", Toast.LENGTH_LONG).show();
+                        }
                     } else {
                         Context context = v.getContext();
                         Intent intent = new Intent(context, NavigationDetailActivity.class);

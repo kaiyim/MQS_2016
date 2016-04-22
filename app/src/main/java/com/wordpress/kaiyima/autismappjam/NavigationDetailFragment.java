@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.app.Activity;
+import android.widget.Toast;
 
 import com.wordpress.kaiyima.autismappjam.dummy.DummyContent;
 
@@ -28,11 +29,13 @@ public class NavigationDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_USER_NAME = "user_name";
 
     /**
      * The dummy content this fragment is presenting.
      */
     private DummyContent.DummyItem mItem;
+    private String userName;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -45,17 +48,19 @@ public class NavigationDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (getArguments().containsKey(ARG_USER_NAME)) {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
+//            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_USER_NAME));
+//
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
             if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.content);
+                appBarLayout.setTitle("Play Game");
             }
+            userName = getArguments().getString(ARG_USER_NAME);
+//            Toast.makeText(this.getActivity(), userName, Toast.LENGTH_LONG).show();
         }
     }
 
@@ -80,6 +85,7 @@ public class NavigationDetailFragment extends Fragment {
 
     public void playButtonClicked(View view){
         Intent intent = new Intent(getActivity(), MainActivity.class);
+        intent.putExtra("userName", userName);
         startActivity(intent);
     }
 

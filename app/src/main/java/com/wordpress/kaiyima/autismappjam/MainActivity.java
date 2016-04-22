@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
 //            }
 //        });
 
-
+//---------------------------------------------Enter Button-----------------------------------------//
         enterButton = (Button)findViewById(R.id.enter_button);
         enterButton.setOnClickListener(
                 new Button.OnClickListener(){
