@@ -7,4 +7,5 @@
     <string name="title_navigation_detail">Navigation Detail</string>
     <string name="play_now_button">Play Now!</string>
     <string name="leader_board_string">Leader Board</string>
+    <string name="lt_return_to_question_list">Return to question list</string>
 </resources>

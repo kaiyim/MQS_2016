@@ -22,8 +22,7 @@
         <activity
             android:name=".NavigationListActivity"
             android:label="@string/title_navigation_list"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".NavigationDetailActivity"
             android:label="@string/title_navigation_detail"
@@ -33,6 +32,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.wordpress.kaiyima.autismappjam.NavigationListActivity" />
         </activity>
+        <activity android:name=".QuestionList"></activity>
+        <activity android:name=".QuestionOne"></activity>
+        <activity android:name=".QuestionTwo"></activity>
+        <activity android:name=".QuestionThree"></activity>
+        <activity android:name=".QuestionFour"></activity>
+        <activity android:name=".QuestionFive"></activity>
+        <activity android:name=".QuestionSix"></activity>
+        <activity android:name=".QuestionSeven"></activity>
+        <activity android:name=".QuestionEight"></activity>
     </application>
 
 </manifest>

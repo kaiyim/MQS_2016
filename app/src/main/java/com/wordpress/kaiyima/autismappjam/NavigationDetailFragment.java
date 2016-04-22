@@ -84,7 +84,7 @@ public class NavigationDetailFragment extends Fragment {
     }
 
     public void playButtonClicked(View view){
-        Intent intent = new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), QuestionList.class);
         intent.putExtra("userName", userName);
         startActivity(intent);
     }
