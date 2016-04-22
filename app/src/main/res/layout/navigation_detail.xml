@@ -10,16 +10,61 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.wordpress.kaiyima.autismappjam.NavigationDetailActivity"
-    android:id="@+id/SelectGameLayout">
+    android:id="@+id/SelectGameLayout"
+    android:contentDescription="Store">
     <!--tools:showIn="@layout/activity_navigation_detail"-->
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:text="@string/play_now_button"
         android:id="@+id/PlayGameButton"
-        android:layout_alignParentTop="true"
+        android:background="@drawable/store"
+        android:layout_above="@+id/space"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/imageButton"
+        android:background="@drawable/tophat"
+        android:layout_below="@+id/space"
+        android:layout_toLeftOf="@+id/space"
+        android:layout_toStartOf="@+id/space"
+        android:layout_marginTop="50dp"
+        android:layout_marginRight="50dp" />
+
+    <Space
+        android:layout_width="20px"
+        android:layout_height="20px"
+        android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="208dp" />
+        android:id="@+id/space" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Store"
+        android:id="@+id/ButtonOneText"
+        android:layout_alignRight="@+id/PlayGameButton"
+        android:layout_alignEnd="@+id/PlayGameButton"
+        android:layout_alignLeft="@+id/PlayGameButton"
+        android:layout_alignStart="@+id/PlayGameButton"
+        android:textAlignment="center"
+        android:layout_below="@+id/PlayGameButton" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Theater"
+        android:id="@+id/ButtonTwoText"
+        android:layout_below="@+id/imageButton"
+        android:layout_alignLeft="@+id/imageButton"
+        android:layout_alignStart="@+id/imageButton"
+        android:layout_alignRight="@+id/imageButton"
+        android:layout_alignEnd="@+id/imageButton"
+        android:textAlignment="center" />
 </RelativeLayout>

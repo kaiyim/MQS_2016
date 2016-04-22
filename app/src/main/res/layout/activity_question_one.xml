@@ -83,15 +83,16 @@
         android:id="@+id/Q1pre"
         android:layout_above="@+id/Q1return"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:visibility="gone" />
 
     <Button
         android:layout_width="90dp"
         android:layout_height="50dp"
         android:text="next"
         android:id="@+id/Q1nex"
-        android:layout_below="@+id/Q1pre"
-        android:layout_alignLeft="@+id/Q1pre"
-        android:layout_alignStart="@+id/Q1pre" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
