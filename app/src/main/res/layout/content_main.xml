@@ -18,14 +18,14 @@
     android:background="@drawable/flower">
 
     <ImageView
-        android:layout_width="320dp"
-        android:layout_height="115dp"
+        android:layout_width="350dp"
+        android:layout_height="150dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/welcomeText"
         android:id="@+id/welcomeImage"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/welcome" />
+        android:src="@drawable/welcome"
+        android:layout_above="@+id/instructionText"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Choose an user or create a new user"
         android:id="@+id/instructionText"
-        android:layout_below="@+id/welcomeImage"
+        android:layout_above="@+id/add_user_button"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -42,9 +42,10 @@
         android:text="Add User"
         android:id="@+id/add_user_button"
         android:onClick="addButtonClicked"
-        android:layout_toRightOf="@+id/welcomeImage"
-        android:layout_toEndOf="@+id/welcomeImage"
-        android:layout_below="@+id/instructionText" />
+        android:layout_above="@+id/user_list"
+        android:layout_toRightOf="@+id/user_name_input"
+        android:layout_toEndOf="@+id/user_name_input"
+        android:layout_marginLeft="10dp" />
 
     <Button
         android:layout_width="wrap_content"
@@ -64,21 +65,20 @@
         android:ems="10"
         android:id="@+id/user_name_input"
         android:autoText="false"
-        android:layout_alignBottom="@+id/add_user_button"
-        android:layout_toLeftOf="@+id/add_user_button"
-        android:layout_toStartOf="@+id/add_user_button"
-        android:layout_alignLeft="@+id/instructionText" />
+        android:layout_above="@+id/user_list"
+        android:layout_alignLeft="@+id/welcomeImage"
+        android:layout_alignStart="@+id/welcomeImage" />
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="200dp"
         android:id="@+id/user_list"
-        android:layout_below="@+id/add_user_button"
-        android:layout_alignLeft="@+id/user_name_input"
-        android:layout_alignStart="@+id/user_name_input"
-        android:layout_alignRight="@+id/add_user_button"
-        android:layout_alignEnd="@id/add_user_button"
-        android:choiceMode="singleChoice" />
+        android:choiceMode="singleChoice"
+        android:layout_centerVertical="true"
+        android:layout_alignLeft="@+id/welcomeImage"
+        android:layout_alignStart="@+id/welcomeImage"
+        android:layout_alignRight="@+id/welcomeImage"
+        android:layout_alignEnd="@+id/welcomeImage" />
 
     <Button
         android:layout_width="wrap_content"
