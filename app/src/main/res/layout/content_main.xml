@@ -22,7 +22,7 @@
         android:layout_height="115dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/welcomeText"
-        android:id="@+id/welcomeText"
+        android:id="@+id/welcomeImage"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:src="@drawable/welcome" />
@@ -33,7 +33,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Choose an user or create a new user"
         android:id="@+id/instructionText"
-        android:layout_below="@+id/welcomeText"
+        android:layout_below="@+id/welcomeImage"
         android:layout_centerHorizontal="true" />
 
     <Button
@@ -42,8 +42,8 @@
         android:text="Add User"
         android:id="@+id/add_user_button"
         android:onClick="addButtonClicked"
-        android:layout_toRightOf="@+id/welcomeText"
-        android:layout_toEndOf="@+id/welcomeText"
+        android:layout_toRightOf="@+id/welcomeImage"
+        android:layout_toEndOf="@+id/welcomeImage"
         android:layout_below="@+id/instructionText" />
 
     <Button

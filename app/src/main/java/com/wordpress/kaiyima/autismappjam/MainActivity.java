@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Button;
@@ -62,8 +63,6 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
                 new Button.OnClickListener(){
                     public void onClick(View v){
                         if(!userChoice.isEmpty()) {
-                            TextView welcomeTag = (TextView) findViewById(R.id.welcomeText);
-                            welcomeTag.setText("Entering Magic World!");
                             Intent toNavigation = new Intent(MainActivity.this, NavigationListActivity.class);
                             toNavigation.putExtra("userName", userChoice);
                             startActivity(toNavigation);
