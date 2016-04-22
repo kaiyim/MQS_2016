@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 public class QuestionList extends AppCompatActivity {
@@ -20,6 +21,7 @@ public class QuestionList extends AppCompatActivity {
             "Question 36", "Question 37", "Question 38", "Question 39"};
     ArrayAdapter<String> adapter;
     String userName;
+    Button bt;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -29,6 +31,15 @@ public class QuestionList extends AppCompatActivity {
         if(userData != null){
             userName = userData.getString("userName");
         }
+
+        bt = (Button) findViewById(R.id.backtohomebutton);
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(QuestionList.this, NavigationListActivity.class);
+                startActivity(i);
+            }
+        });
 
         lv = (ListView) findViewById(R.id.listView);
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, questions);

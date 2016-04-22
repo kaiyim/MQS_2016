@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
 //            }
 //        });
 
-//---------------------------------------------Enter Button-----------------------------------------//
+//---------------------------------------------Enter Button---------------------------------------------//
         enterButton = (Button)findViewById(R.id.enter_button);
         enterButton.setOnClickListener(
                 new Button.OnClickListener(){
@@ -75,19 +75,22 @@ public class MainActivity extends AppCompatActivity implements TextView.OnEditor
         );
 
         userChoice = "";
-//        leaderboard = (TextView) findViewById(R.id.leader_board);
+// ---------------------------------------------Data Base---------------------------------------------//
         profileDBManager = new ProfileDBManager(this, null, null, 1);
         profileList = profileDBManager.databaseToList();
 //        profileHashMap = profileDBManager.databaseToHashMap();
 
 //        final Button addUserButton = (Button)findViewById(R.id.add_user_button);
 //        final Button deleteUserButton = (Button)findViewById(R.id.delete_user_button);
+
+//---------------------------------------------User Input---------------------------------------------//
         userNameInput = (EditText) findViewById(R.id.user_name_input);
         userNameInput.setOnEditorActionListener(this);
         imm = (InputMethodManager)this.getSystemService(Service.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(userNameInput.getWindowToken(), 0);
         imm.showSoftInput(userNameInput, 0);
 
+//---------------------------------------------List View---------------------------------------------//
         userNameList = new ArrayList<>();
         for (UserProfile k : profileList){
             userNameList.add(k.get_username());

@@ -25,7 +25,7 @@ public class DummyContent {
 
     private static final int COUNT = 5;
 
-    private static final String[] MenuItem = {"Play Game", "Daily Quest", "Achievement", "Weekly Leaderboard", "Help"};
+    private static final String[] MenuItem = {"Play Game", "Daily Quest", "Achievement", "Weekly Leaderboard", "Settings"};
 
     static {
         // Add some sample items.

@@ -72,14 +72,28 @@ public class ProfileDBManager extends SQLiteOpenHelper{
         return true;
     }
 
-    public String databaseToString(){
+    public UserProfile getProfile(String userName){
+        UserProfile user = new UserProfile(userName);
+        SQLiteDatabase db = getReadableDatabase();
+        String query = "SELECT * FROM " + TABLE_PROFILE + " WHERE " +
+                COLUMN_USERNAME + "=\"" + userName + "\";";
+        Cursor c = db.rawQuery(query, null);
+        c.moveToFirst();
+        if (c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null) {
+            user.set_exp(c.getInt(c.getColumnIndex(COLUMN_EXP)));
+            user.set_id(c.getInt(c.getColumnIndex(COLUMN_ID)));
+        }
+        return user;
+    }
+
+    public String databaseToString() {
         String dbString = "";
         SQLiteDatabase db = getWritableDatabase();
         String query = "SELECT * FROM " + TABLE_PROFILE + " WHERE 1;";
         Cursor c = db.rawQuery(query, null);
         c.moveToFirst();
-        while (!c.isAfterLast()){
-            if(c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null){
+        while (!c.isAfterLast()) {
+            if (c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null) {
                 dbString += c.getString(c.getColumnIndex(COLUMN_ID)) + " " +
                         c.getString(c.getColumnIndex(COLUMN_USERNAME)) + ": " +
                         c.getString(c.getColumnIndex(COLUMN_EXP)) + "xp\n";
@@ -89,25 +103,6 @@ public class ProfileDBManager extends SQLiteOpenHelper{
         db.close();
         return dbString;
     }
-
-//    public HashMap<String, UserProfile> databaseToHashMap(){
-//        HashMap<String, UserProfile> dbMap = new HashMap<String, UserProfile>();
-//        SQLiteDatabase db = getWritableDatabase();
-//        String query = "SELECT * FROM " + TABLE_PROFILE + " WHERE 1;";
-//        Cursor c = db.rawQuery(query, null);
-//        c.moveToFirst();
-//        while (!c.isAfterLast()){
-//            if(c.getString(c.getColumnIndex(COLUMN_USERNAME)) != null){
-//                UserProfile userProfile = new UserProfile(c.getString(c.getColumnIndex(COLUMN_USERNAME)));
-//                userProfile.set_id(c.getInt(c.getColumnIndex(COLUMN_ID)));
-//                userProfile.set_exp(c.getInt(c.getColumnIndex(COLUMN_EXP)));
-//                dbMap.put(c.getString(c.getColumnIndex(COLUMN_USERNAME)), userProfile);
-//            }
-//            c.moveToNext();
-//        }
-//        db.close();
-//        return dbMap;
-//    }
 
     public ArrayList<UserProfile> databaseToList(){
         ArrayList<UserProfile> dbList = new ArrayList<>();

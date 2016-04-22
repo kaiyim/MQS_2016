@@ -29,7 +29,7 @@ import java.util.List;
  * item details. On tablets, the activity presents the list of items and
  * item details side-by-side using two vertical panes.
  */
-public class NavigationListActivity extends AppCompatActivity {
+public class NavigationListActivity extends AppCompatActivity implements QuestFragment.OnFragmentInteractionListener{
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -37,6 +37,7 @@ public class NavigationListActivity extends AppCompatActivity {
      */
     private boolean mTwoPane;
     private String userName;
+    public int mQuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,10 @@ public class NavigationListActivity extends AppCompatActivity {
             // activity should be in two-pane mode.
             mTwoPane = true;
         }
+    }
+
+    public void createQuest(int quest){
+        mQuest = quest;
     }
 
 
@@ -120,7 +125,14 @@ public class NavigationListActivity extends AppCompatActivity {
                         }
                         //id = 2 -->Daily Quest
                         else if (holder.mItem.id == "2"){
-                            Toast.makeText(NavigationListActivity.this, "pos 2", Toast.LENGTH_LONG).show();
+                            Bundle arguments = new Bundle();
+                            arguments.putString(NavigationDetailFragment.ARG_USER_NAME, userName);
+                            QuestFragment fragment = new QuestFragment();
+                            fragment.setArguments(arguments);
+                            getSupportFragmentManager().beginTransaction()
+                                    .replace(R.id.navigation_detail_container, fragment)
+                                    .commit();
+
                         }
                     } else {
                         Context context = v.getContext();

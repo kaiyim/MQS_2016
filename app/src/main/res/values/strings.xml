@@ -8,4 +8,7 @@
     <string name="play_now_button">Play Now!</string>
     <string name="leader_board_string">Leader Board</string>
     <string name="lt_return_to_question_list">Return to question list</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
