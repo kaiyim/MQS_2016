@@ -1,23 +1,16 @@
 
-App Name
--- Skill Training App for Autistic Children
+# MQS
+### Skill training app for children with autism
 
-Description:
-Android 平板APP，以游戏的形式锻炼自闭症儿童的生活技能。家长和孩子一起使用，通过完成不同的任务获得XP，每天到达一定XP值奖励勋章。通关后可以将勋章分享到社交网站(Facebook)。家长可以自己创建新任务（optional）
+**Description:**
+ - An app for children with autism on Android tablets. 
+ - Learning multiple daily skills with interesting games.
+ - Gain exp points when finishing tasks and unlock badges as exp grows.
+ - Share your badges on social network.
+ - Customize new games and lessons by parent.
 
-系统组成：
-1. 登录/注册系统
-2. 经验系统（优先）
-3. 任务系统（优先）
+**System Components:**
+1. login/registration
+2. experience system
+3. task system
 4. Facebook API
-
----------------------------------------登录/注册系统---------------------------------------
-通过Facebook登录，或者离线访问。
-Facebook 登录方便之后分享。
-一个用户可以同时有一个以上孩子使用，每个孩子有个profile分别记录进程
-
----------------------------------------经验系统---------------------------------------
-完成一个任务加5xp， 达到一定经验升级：lv. 2 = 10; lv. 3 = 20; lv. 4 = 40 …
-
----------------------------------------任务系统---------------------------------------
-
